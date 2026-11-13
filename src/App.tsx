@@ -219,7 +219,7 @@ function Contact() {
       form.reset();
       setStatus({ kind: 'ok', text: 'Thanks, your message is on its way. I’ll reply soon.' });
     } catch {
-      setStatus({ kind: 'error', text: `Your message couldn’t be sent. Please try again, or email me directly at ${site.email}.` });
+      setStatus({ kind: 'error', text: `Your message couldn’t be sent. Please try again, or message me on LinkedIn or X.` });
     }
   };
 
@@ -238,7 +238,6 @@ function Contact() {
       <h2 id="contact-title">Start a conversation.</h2>
       <p>Have a project, idea, or opportunity in mind? Send a note and let’s make it happen.</p>
       {site.email && <div className="contactLinks">
-        <a className="textLink" href={`mailto:${site.email}`}>{site.email}</a>
         <a className="textLink" href={site.socials.linkedin} target="_blank" rel="noopener me">LinkedIn</a>
         <a className="textLink" href={site.socials.x} target="_blank" rel="noopener me">X (Twitter)</a>
         <a className="textLink" href={site.cv} target="_blank" rel="noopener"><FileText size={16} aria-hidden="true" /> View CV</a>
