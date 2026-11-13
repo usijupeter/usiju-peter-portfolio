@@ -68,6 +68,29 @@ Decision: the owner prefers **Next.js**, and the site will grow to include a **b
 
 Needed from the owner to start: recipient email, Resend account/API key, and where blog posts will be written (MDX files in the repo is the default).
 
+**Status:** agreed on 2026-11-13, to be done on the Windows machine.
+
+### Expected effort (agent working session, excluding waiting on content/keys)
+
+| Part | Rough time |
+| --- | --- |
+| Next.js setup + port pages, styles, fonts, dark mode | 1–1.5 h |
+| MDX projects + blog: routes, blog index, RSS, sitemap, OG images | 1–1.5 h |
+| Resend contact route with validation and spam protection | 30–45 min |
+| Cross-device testing, accessibility, Lighthouse, deploy | ~1 h |
+
+### Expected speed trade-off vs the current Vite + Preact build
+
+Next.js adds roughly 70–90 KB (gzipped) of framework JavaScript. With static generation, content **appears** about as fast as today; the difference is when the page becomes **interactive**:
+
+| Situation | Extra delay before taps respond | Noticeable? |
+| --- | --- | --- |
+| Modern phone / laptop on Wi-Fi or 4G | < 0.1 s | No |
+| Mid-range Android, average mobile data | ~0.2–0.4 s | Barely |
+| Budget Android on slow 3G | ~0.5–1 s | Yes, for an immediate tap |
+
+Expected Lighthouse mobile after migration: ~92–97 (currently 99–100). Keep it there by using Server Components by default, client components only for the menu, theme toggle and contact form, `next/font` + `next/image`, static generation for every page, and measuring before each deploy.
+
 ## Accounts on the borrowed Mac — sign out before leaving
 
 These logins belong to you and were used on the borrowed Mac. Before handing it back, run in Terminal:
