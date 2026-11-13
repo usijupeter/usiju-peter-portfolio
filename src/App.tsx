@@ -132,10 +132,11 @@ function Hero() {
       </div>
     </div>
     <div className="heroCopy">
-      <h1 id="hero-title">Usiju Peter<span>Creative Developer</span></h1>
-      <p>{site.intro}</p>
+      <h1 id="hero-title">Usiju Peter</h1>
+      <p className="heroRole">{site.role}</p>
+      <p className="heroIntro">{site.intro}</p>
       <div className="actions">
-        <Btn href="#contact">Start a Conversation</Btn>
+        <Btn href="#contact">Start a conversation</Btn>
         <a className="textLink underline" href={site.cv} target="_blank" rel="noopener"><FileText size={16} aria-hidden="true" /> View CV</a>
       </div>
     </div>
@@ -161,7 +162,7 @@ function ProjectCard({ p, delay }: { p: Project; delay: number }) {
 
 function Work() {
   return <section id="work" className="section work" aria-labelledby="work-title">
-    <Reveal><Label>01 / Selected work</Label><h2 id="work-title">Selected Projects</h2></Reveal>
+    <Reveal><Label>01 / Selected work</Label><h2 id="work-title">Selected projects</h2></Reveal>
     <ul className="workTiles" role="list">{projects.map((p, i) => <li key={p.slug}><ProjectCard p={p} delay={i * 0.08} /></li>)}</ul>
   </section>;
 }
@@ -207,7 +208,6 @@ function Contact() {
     setErrors(e);
     const first = (Object.keys(e) as Field[])[0];
     if (first) { (form.elements.namedItem(first) as HTMLElement | null)?.focus(); setStatus({ kind: 'idle', text: '' }); return; }
-    if (!site.email) { setStatus({ kind: 'error', text: 'The contact form isn’t connected yet. Please reach out on LinkedIn or X for now.' }); return; }
     setStatus({ kind: 'sending', text: 'Sending…' });
     try {
       const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
@@ -237,12 +237,20 @@ function Contact() {
       <Label>03 / Contact</Label>
       <h2 id="contact-title">Start a conversation.</h2>
       <p>Have a project, idea, or opportunity in mind? Send a note and let’s make it happen.</p>
-      <div className="contactLinks">
-        {site.email && <a className="textLink" href={`mailto:${site.email}`}>{site.email}</a>}
+      {site.email && <div className="contactLinks">
+        <a className="textLink" href={`mailto:${site.email}`}>{site.email}</a>
         <a className="textLink" href={site.socials.linkedin} target="_blank" rel="noopener me">LinkedIn</a>
+        <a className="textLink" href={site.socials.x} target="_blank" rel="noopener me">X (Twitter)</a>
         <a className="textLink" href={site.cv} target="_blank" rel="noopener"><FileText size={16} aria-hidden="true" /> View CV</a>
-      </div>
+      </div>}
     </div>
+    {/* Until a delivery address is set in data.ts, show direct routes instead of a form that can't send. */}
+    {!site.email ? <div className="contactDirect">
+      <p className="label">The quickest ways to reach me</p>
+      <a className="directLink" href={site.socials.linkedin} target="_blank" rel="noopener me"><span>Message me on LinkedIn</span><ArrowUpRight aria-hidden="true" /></a>
+      <a className="directLink" href={site.socials.x} target="_blank" rel="noopener me"><span>Message me on X (Twitter)</span><ArrowUpRight aria-hidden="true" /></a>
+      <a className="directLink" href={site.cv} target="_blank" rel="noopener"><span>View my CV</span><FileText aria-hidden="true" /></a>
+    </div> :
     <form className="contactForm" onSubmit={submit} noValidate>
       <label htmlFor="f-name">Name</label>
       <div className="field"><input {...fieldProps('name')} autoComplete="name" maxLength={100} placeholder="Your name" />{err('name')}</div>
@@ -253,7 +261,7 @@ function Contact() {
       <input type="text" name="_honey" className="honey" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       <button type="submit" className="btn" disabled={status.kind === 'sending'}>{status.kind === 'sending' ? 'Sending…' : 'Send message'} <ArrowUpRight size={16} aria-hidden="true" /></button>
       <p className={`formNotice ${status.kind}`} role="status" aria-live="polite">{status.text}</p>
-    </form>
+    </form>}
   </div></Reveal></section>;
 }
 

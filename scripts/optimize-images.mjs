@@ -20,11 +20,17 @@ for (const { dir, widths, formats } of jobs) {
 }
 
 // Card thumbnails: full-width homepage capture at the card aspect ratio (1280x900).
+// A project can override the crop (same 1.422 ratio) when its full hero is too dark or detailed to read at card size.
+const cardCrops = {
+  // Zoom in on the logo, tagline and buttons: the full dark interior read as a dark block beside the other cards.
+  '444-premium': { left: 220, top: 230, width: 1000, height: 703 },
+};
 for (const file of (await readdir('assets-src/projects')).filter(f => f.endsWith('.png'))) {
   const name = file.replace(/\.png$/, '');
+  const crop = cardCrops[name] ?? { left: 9, top: 0, width: 1422, height: 1000 };
   for (const w of [640, 1280]) {
     const out = `public/projects/${name}-card-${w}.webp`;
-    await sharp(`assets-src/projects/${file}`).extract({ left: 9, top: 0, width: 1422, height: 1000 }).resize({ width: w }).webp({ quality: 80 }).toFile(out);
+    await sharp(`assets-src/projects/${file}`).extract(crop).resize({ width: w }).webp({ quality: 80 }).toFile(out);
     console.log(out);
   }
 }
