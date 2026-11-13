@@ -3,8 +3,11 @@ export const SITE_URL = 'https://usijupeter.vercel.app';
 export const site = {
   name: 'Usiju Peter',
   role: 'Creative Developer',
-  /** Contact-form messages are delivered here (via FormSubmit). Leave empty to hide the form's send action. */
-  email: 'usijup3@gmail.com',
+  /**
+   * FormSubmit endpoint for the contact form: the random alias FormSubmit issued after activation,
+   * so the real inbox address never appears in the site's code. Leave empty to replace the form with direct links.
+   */
+  email: '88d0658fb5dc49d108bbd1bfefaf30bc',
   cv: '/cv/usiju-peter-cv.pdf',
   socials: {
     linkedin: 'https://www.linkedin.com/in/usiju-peter-115052235/',
