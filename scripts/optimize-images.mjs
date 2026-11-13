@@ -18,3 +18,13 @@ for (const { dir, widths, formats } of jobs) {
     }
   }
 }
+
+// Card thumbnails: full-width homepage capture at the card aspect ratio (1280x900).
+for (const file of (await readdir('assets-src/projects')).filter(f => f.endsWith('.png'))) {
+  const name = file.replace(/\.png$/, '');
+  for (const w of [640, 1280]) {
+    const out = `public/projects/${name}-card-${w}.webp`;
+    await sharp(`assets-src/projects/${file}`).extract({ left: 9, top: 0, width: 1422, height: 1000 }).resize({ width: w }).webp({ quality: 80 }).toFile(out);
+    console.log(out);
+  }
+}
