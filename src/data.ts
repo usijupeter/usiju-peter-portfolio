@@ -4,7 +4,7 @@ export const site = {
   name: 'Usiju Peter',
   role: 'Creative Developer',
   /** Contact-form messages are delivered here (via FormSubmit). Leave empty to hide the form's send action. */
-  email: '',
+  email: 'usijup3@gmail.com',
   cv: '/cv/usiju-peter-cv.pdf',
   socials: {
     linkedin: 'https://www.linkedin.com/in/usiju-peter-115052235/',
