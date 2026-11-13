@@ -49,7 +49,7 @@ All scripts are plain Node, so they run the same on Windows. `.gitattributes` ke
 
 ## Open to-do list
 
-1. **Contact form email** — the form uses FormSubmit and needs a recipient. Set `email` in `src/data.ts`, deploy, submit once, click FormSubmit's activation email. (Will be replaced by Resend in the Next.js move.)
+1. ~~**Contact form email**~~ — DONE 2026-11-13: FormSubmit activated for usijup3@gmail.com; `site.email` holds FormSubmit's random alias so the inbox address isn't in the code. Test messages confirmed received. (Will be replaced by Resend in the Next.js move.)
 2. **Auto-deploy on push** — Vercel's GitHub connection is linked to a different GitHub account (`12Wfg`), so it can't see the `usijupeter` repo. Fix (browser, ~2 min): Vercel → Account Settings → Authentication → connect GitHub as `usijupeter`; then project `usijupeter` → Settings → Git → connect `usijupeter/usiju-peter-portfolio`.
 3. **Google Search Console** — add the site, verify (send the code to be added to `index.html`), submit `/sitemap.xml`.
 4. **Content** — for each case study: your role, stack, results, a testimonial. Plus more projects (1440×1000 PNG screenshots → `assets-src/projects/`).
