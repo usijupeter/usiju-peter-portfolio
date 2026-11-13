@@ -2,17 +2,71 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Usiju Peter — Creative Developer & Digital Experience Designer." />
-    <meta property="og:title" content="Usiju Peter — Portfolio" />
-    <meta property="og:description" content="Clear, considered websites and digital experiences." />
-    <link rel="preload" as="image" href="/images/usiju-peter.webp" type="image/webp" fetchpriority="high" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Usiju Peter — Creative Developer &amp; Web Designer</title>
+    <meta name="description" content="Usiju Peter is a creative developer and digital experience designer building clear, considered, responsive websites for brands and businesses." />
+    <meta name="author" content="Usiju Peter" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://usijupeter.vercel.app/" />
+
+    <meta name="theme-color" content="#f7fbff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d1520" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Open Graph / social previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Usiju Peter" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content="https://usijupeter.vercel.app/" />
+    <meta property="og:title" content="Usiju Peter — Creative Developer" />
+    <meta property="og:description" content="Clear, considered websites and digital experiences. See selected work and start a conversation." />
+    <meta property="og:image" content="https://usijupeter.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Usiju Peter — Creative Developer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Usiju_2004" />
+    <meta name="twitter:creator" content="@Usiju_2004" />
+    <meta name="twitter:title" content="Usiju Peter — Creative Developer" />
+    <meta name="twitter:description" content="Clear, considered websites and digital experiences." />
+    <meta name="twitter:image" content="https://usijupeter.vercel.app/og-image.jpg" />
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/src/portrait.css" />
-    <link rel="stylesheet" href="/src/hero-refresh.css" />
-    <link rel="stylesheet" href="/src/work-refresh.css" />
-    <link rel="stylesheet" href="/src/simplify.css" />
-    <title>Usiju Peter — Creative Developer</title>
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preload" as="image" type="image/avif" href="/images/usiju-peter-900.avif" imagesrcset="/images/usiju-peter-480.avif 480w, /images/usiju-peter-900.avif 900w" imagesizes="(max-width: 760px) 72vw, 420px" fetchpriority="high" />
+    <script src="/theme.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://usijupeter.vercel.app/#person",
+          "name": "Usiju Peter",
+          "jobTitle": "Creative Developer & Digital Experience Designer",
+          "url": "https://usijupeter.vercel.app/",
+          "image": "https://usijupeter.vercel.app/images/usiju-peter-900.webp",
+          "sameAs": ["https://www.linkedin.com/in/usiju-peter-115052235/", "https://x.com/Usiju_2004"],
+          "knowsAbout": ["Frontend Development", "Web Design", "Responsive Interfaces", "Motion & Interaction", "User Experience", "Website Optimization"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://usijupeter.vercel.app/#website",
+          "url": "https://usijupeter.vercel.app/",
+          "name": "Usiju Peter",
+          "author": { "@id": "https://usijupeter.vercel.app/#person" }
+        }
+      ]
+    }
+    </script>
   </head>
-  <body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
