@@ -4,8 +4,9 @@ on:
     branches: [main]
   pull_request:
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -13,4 +14,14 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npm test   # type-check, build, prerender, then check-dist
+      - run: npx playwright install --with-deps chromium
+      # lint -> type-check + build + prerender -> check-dist -> browser tests (desktop + mobile, axe a11y scan)
+      - run: npm test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

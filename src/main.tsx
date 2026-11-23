@@ -15,5 +15,6 @@ document.documentElement.setAttribute('data-app', '');
 if (import.meta.env.PROD) {
   // Analytics load after the page is idle so they never compete with first paint.
   const start = () => { inject(); injectSpeedInsights(); };
-  'requestIdleCallback' in window ? requestIdleCallback(start, { timeout: 4000 }) : setTimeout(start, 2000);
+  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 4000 });
+  else setTimeout(start, 2000);
 }
