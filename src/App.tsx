@@ -75,6 +75,7 @@ function Nav({ home }: { home: boolean }) {
     const background = Array.from(document.querySelectorAll<HTMLElement>('.skipLink, header.nav, main, footer'));
     background.forEach(el => { el.inert = true; });
     const root = panel.current!;
+    const openerEl = opener.current;
     const focusables = () => Array.from(root.querySelectorAll<HTMLElement>('a, button'));
     focusables()[0]?.focus();
     const onKey = (e: KeyboardEvent) => {
@@ -89,7 +90,7 @@ function Nav({ home }: { home: boolean }) {
       document.removeEventListener('keydown', onKey);
       background.forEach(el => { el.inert = false; });
       document.documentElement.classList.remove('menuOpen');
-      opener.current?.focus({ preventScroll: true });
+      openerEl?.focus({ preventScroll: true });
     };
   }, [open]);
 

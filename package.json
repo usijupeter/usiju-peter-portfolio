@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "lint": "eslint .",
     "check": "node scripts/check-dist.mjs",
-    "test": "npm run build && npm run check",
+    "test:e2e": "playwright test",
+    "test": "npm run lint && npm run build && npm run check && npm run test:e2e",
     "preview": "vite preview",
     "images": "node scripts/optimize-images.mjs"
   },
@@ -19,13 +21,20 @@
     "preact-render-to-string": "^6.5.13"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.65.1",
     "@preact/preset-vite": "^2.9.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.14.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sharp": "^0.33.5",
     "typescript": "^5.7.2",
+    "typescript-eslint": "^8.73.0",
     "vite": "^6.4.6"
   },
   "engines": {
