@@ -9,6 +9,8 @@ const app = <App path={location.pathname} />;
 // Production pages are pre-rendered into #root; hydrate them. In dev #root is empty, so render fresh.
 if (root.firstElementChild) hydrate(app, root);
 else render(app, root);
+// Tells theme.js the app is running, so it keeps the scroll-reveal styles (see the safety net there).
+document.documentElement.setAttribute('data-app', '');
 
 if (import.meta.env.PROD) {
   // Analytics load after the page is idle so they never compete with first paint.

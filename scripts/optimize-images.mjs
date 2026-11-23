@@ -34,3 +34,12 @@ for (const file of (await readdir('assets-src/projects')).filter(f => f.endsWith
     console.log(out);
   }
 }
+
+// Social share cards (Open Graph / X): 1200x630 JPG per project, cropped from the top of the capture.
+// JPG rather than WebP because some link-preview crawlers still skip WebP.
+await mkdir('public/og', { recursive: true });
+for (const file of (await readdir('assets-src/projects')).filter(f => f.endsWith('.png'))) {
+  const out = `public/og/${file.replace(/\.png$/, '')}.jpg`;
+  await sharp(`assets-src/projects/${file}`).resize({ width: 1200, height: 630, fit: 'cover', position: 'top' }).jpeg({ quality: 82, progressive: true, mozjpeg: true }).toFile(out);
+  console.log(out);
+}

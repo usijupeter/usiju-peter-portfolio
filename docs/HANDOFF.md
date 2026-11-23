@@ -47,6 +47,10 @@ All scripts are plain Node, so they run the same on Windows. `.gitattributes` ke
 - Full audit (30 categories) scored 73.6/100 before fixes; nearly every finding fixed afterwards (see report link above).
 - Latest Lighthouse (mobile, live): Performance 99–100, Accessibility 100, Best Practices 100, SEO 100.
 
+## Code audit (2026-11-23)
+
+Fixed on branch `audit-fixes-2026-11-23`: per-project share images (case-study links showed the homepage card), content could stay invisible if JS failed, case-study screenshots now responsive (640/1280), sitemap + robots generated from routes, site URL in one place, form time trap against bots, footer year fixed at build time, React moved to devDependencies, minor updates (Preact 10.29, Vite 6.4.6), `npm test` smoke check + GitHub Actions CI. Left for the Next.js move: major upgrades (Vite 8, TS 7, lucide 1.x, Preact 11, Vercel analytics 2) and proper server-side spam protection (Resend route).
+
 ## Open to-do list
 
 1. ~~**Contact form email**~~ — DONE 2026-11-13: FormSubmit activated for usijup3@gmail.com; `site.email` holds FormSubmit's random alias so the inbox address isn't in the code. Test messages confirmed received. (Will be replaced by Resend in the Next.js move.)

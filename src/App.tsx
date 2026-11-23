@@ -189,6 +189,8 @@ const emailOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 function Contact() {
   const [status, setStatus] = useState<Status>({ kind: 'idle', text: '' });
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
+  const shownAt = useRef(Infinity); // set once the form is live in the browser
+  useEffect(() => { shownAt.current = Date.now(); }, []);
 
   const validate = (data: Record<string, string>) => {
     const e: Partial<Record<Field, string>> = {};
@@ -208,6 +210,9 @@ function Contact() {
     setErrors(e);
     const first = (Object.keys(e) as Field[])[0];
     if (first) { (form.elements.namedItem(first) as HTMLElement | null)?.focus(); setStatus({ kind: 'idle', text: '' }); return; }
+    // Time trap: nobody types a name, email and message within 3 s of the page loading, but form-filling bots do.
+    // Show the normal success message so the bot learns nothing, and send nothing.
+    if (Date.now() - shownAt.current < 3000) { form.reset(); setStatus({ kind: 'ok', text: 'Thanks, your message is on its way. I’ll reply soon.' }); return; }
     setStatus({ kind: 'sending', text: 'Sending…' });
     try {
       const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
@@ -275,7 +280,7 @@ function CaseStudy({ p }: { p: Project }) {
     <p className="caseLede">{p.description}</p>
     <div className="actions"><Btn href={p.live} external>Visit live site</Btn></div>
     <figure className="caseShot">
-      <img src={`/projects/${p.image}-1280.webp`} alt={`${p.title} website homepage`} width="1280" height="889" fetchPriority="high" />
+      <img src={`/projects/${p.image}-1280.webp`} srcSet={`/projects/${p.image}-640.webp 640w, /projects/${p.image}-1280.webp 1280w`} sizes="(max-width: 1076px) 90vw, 980px" alt={`${p.title} website homepage`} width="1280" height="889" fetchPriority="high" />
     </figure>
     <section className="caseBody" aria-label="Highlights">
       <h2>What the site focuses on</h2>
@@ -297,7 +302,7 @@ function Footer({ home }: { home: boolean }) {
       <a href={site.socials.linkedin} target="_blank" rel="noopener me">LinkedIn</a>
       <a href={site.socials.x} target="_blank" rel="noopener me">X (Twitter)</a>
     </nav>
-    <small>© <span>{new Date().getFullYear()}</span> Usiju Peter. All rights reserved.</small>
+    <small>© <span>{__BUILD_YEAR__}</span> Usiju Peter. All rights reserved.</small>
   </footer>;
 }
 
